@@ -1,0 +1,29 @@
+# 🟩 Step 1: Take input from user – alternating names and scores
+lists = input("Enter names and scores alternatively, separated by spaces: ").split()
+# Example input: Ram 92 Sita 85 Geeta 99
+
+# 🟩 Step 2: Separate names and scores using slicing
+names = lists[::2]              # Names at even indexes
+scores = map(int, lists[1::2])  # Scores at odd indexes → convert to int
+
+# 🟩 Step 3: Combine names and scores into tuples
+leaderboard = list(zip(names, scores))
+# Example: [('Ram', 92), ('Sita', 85), ('Geeta', 99)]
+
+# 🟩 Step 4: Define a function to return score from each tuple
+def get_score(item):
+    return item[1]  # item is ('Ram', 92) → item[1] = 92
+
+# 🟩 Step 5: Sort the leaderboard using scores
+sorted_leaderboard = sorted(leaderboard, key=get_score, reverse=True)
+# reverse=True → highest scores come first
+
+# 🟩 Step 6: Display the sorted leaderboard
+print("🏆 Full Leaderboard:")
+for i, (name, score) in enumerate(sorted_leaderboard, start=1):
+    print(f"{i}. {name} — {score}")
+
+# 🟩 Step 7: Show top 3
+print("\nTop 3 Performers:")
+for i in range(min(3, len(sorted_leaderboard))):
+    print(f"{i+1}. {sorted_leaderboard[i][0]} — {sorted_leaderboard[i][1]}")
